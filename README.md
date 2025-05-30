@@ -39,6 +39,14 @@ If the system did not boot in the mode you desired (UEFI vs BIOS), refer to your
 - `mkswap  /dev/swap_partition`
 - `mkfs.fat -F 32 /dev/efi_system_partition`
 
+### Disk Mounting
+
+- `swapon /dev/swap_partition` to enable swap
+- `mkdir -p /mnt/efi`
+- `mount /dev/efi_system_partition /mnt/efi`
+
+In general there are 2 main mountpoints to use: /efi or /boot but in this configuration i am forced to use /efi, because by choosing /boot we could experience a system crash when trying to restore @ ( the root subvolume ) to a previous state after kernel updates. This happens because /boot files such as the kernel won't reside on @ but on the efi partition and hence they can't be saved when snapshotting @. Also this choice grants separation of concerns and also is good if one wants to encrypt /boot, since you can't encrypt efi files. 
+
 
 
 
