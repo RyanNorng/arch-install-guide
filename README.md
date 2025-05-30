@@ -210,7 +210,9 @@ In general there are 2 main mountpoints to use: /efi or /boot but in this config
 - for 32-bit support and to enable steam, the multilib repo must be enabled by editing /etc/pacman.conf
 
 
+## Todo:
 
+- set up snapper
 
 
 
