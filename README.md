@@ -153,10 +153,48 @@ In general there are 2 main mountpoints to use: /efi or /boot but in this config
 - `grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB`
 - generage grub config with `grub-mkconfig -o /boot/grub/grub.cfg`
 
-### Enable NetworkManager before rebooting
+### Unmount everything and reboot
 
-- `systemctl enable NetworkManager`
+- `systemctl enable NetworkManager` to enable NetworkManager before rebooting
+- `exit` to exit chroot
+- `umount -R /mnt` to unmount everything
+- `reboot` and unplug usb
 
+## Step 4: Post-Installation
+
+### Login to user acccount
+
+- just login
+
+### Install additional packages
+
+- "snapper" for snapshots
+- "firewalld" as a firewall
+- "pipewire pipewire-alsa pipewire-pulse pipwire-jack" for audio stuff
+- "wireplumber" as a pipewire session manager
+- "openssh" to use ssh and manage keys
+- "man" for man pages
+- "nvim" as my text editor of choice
+- "firefox" as a web browser
+- `sudo pacman -Syu snapper firewalld pipewire pipewire-alsa pipewire-pulse pipwire-jack wireplumber openssh man nvim firefox`
+
+### Install an AUR-helper (yay)
+
+- `git clone https://aur.archlinux.org/yay.git`
+- `cd yay`
+- `makepg -si`
+
+### Install a desktop environment (COSMIC)
+
+- `sudo pacman -S cosmic`
+
+### Enable cosmic-greeter and other services
+
+- `systemctl enable cosmic-greeter`
+- `systemctl enable sshd`
+- `systemctl enable firewalld`
+
+- reboot and everything should work
 
 
 
