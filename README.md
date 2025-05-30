@@ -16,3 +16,7 @@ Simple enough, figure it out yourself.
   - If it returns No such file or directory, the system may be booted in BIOS (or CSM) mode.
 If the system did not boot in the mode you desired (UEFI vs BIOS), refer to your motherboard's manual.
 
+1.3 Connect to the internet
+- Use the `iwctl` utility for this purpose; and,
+- Confirm that your connection is active with `ping -c 2 archlinux.org`.
+
