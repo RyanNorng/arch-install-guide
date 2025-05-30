@@ -5,6 +5,7 @@ Simple enough, figure it out yourself.
 
 ## Step 2: Boot into live environment
 
+### Pre-partition setup
 1.1 Set the console keybooard layout (US by default):
 - list available keymaps with `localectl list-keymaps`; and,
 - load the keymap with `loadkeys <your keymap here>`.
@@ -22,6 +23,10 @@ If the system did not boot in the mode you desired (UEFI vs BIOS), refer to your
 
 1.4 Update system clock
 - Use `timedatectl`
+
+### Partition the disks
+
+2.1 `lsblk` to list devices
 
 
 
