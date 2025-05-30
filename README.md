@@ -98,11 +98,57 @@ In general there are 2 main mountpoints to use: /efi or /boot but in this config
 - "grub" the bootloader
 - "efibootmgr" needed to install grub
 - "grub-btrfs" btrfs support for grub
-- "vim" text editor of choice
+- "vi" required to visudo and give myself sudo privileges 
 - "networkmanager" to connect to the internet
 - "amd-ucode" for amd microcode
+- "sudo" to allow sudo
 
-`pacstrap -K /mnt base linux linux-firmware base-devel git btrfs-progs grub efibootmgr grub-btrfs vim networkmanager amd-ucode`
+`pacstrap -K /mnt base linux linux-firmware base-devel git btrfs-progs grub efibootmgr grub-btrfs vi networkmanager amd-ucode sudo`
+
+## Step 4: Configure the system
+
+### Generate fstab
+
+- `genfstab -U /mnt >> /mnt/etc/fstab`
+- `cat /mnt/etc/fstab` to see the result
+
+### Chroot into the system
+
+- `arch-chroot /mnt`
+
+### Time
+
+- list timezones with `timedatectl list-timezones`
+- `ln sf /usr/share/zoneinfo/US/Pacific /etc/localtime`
+- `hwclock --systohc`
+
+### Localization
+
+- `vim /etc/local.gen` and uncomment en_US.UTF -8 and en_US ISO-8856-1
+- `locale-gen` to generate the locale
+- `vim /etc/locale.conf` and let the language variable to `LANG=en_US.UTF-8`
+
+### mkinitcpio config
+
+- with btrfs, I'll need to edit /etc/mkinitcpio.conf before regenerating it
+- `vim /etc/mkinitcpio.conf` and set MODULES=(btrfs)
+- regenerate the initramfs with `mkinitcpio -P`
+
+### Create the hostname file
+
+`echo "ArchDesktop" >> /etc/hostname`
+
+### Set the root password and add users
+
+- `passwd`
+- `useradd -m -G wheel,users norng`
+- `passwd norng`
+- give myself sudo privleges by using the command `visudo` and deleting the comment for the wheel group allowing users in the wheel group sudo privileges
+
+
+
+
+### Install bootloader
 
 
 
