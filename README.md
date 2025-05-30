@@ -20,3 +20,8 @@ If the system did not boot in the mode you desired (UEFI vs BIOS), refer to your
 - Use the `iwctl` utility for this purpose; and,
 - Confirm that your connection is active with `ping -c 2 archlinux.org`.
 
+1.4 Update system clock
+- Use `timedatectl`
+
+
+
