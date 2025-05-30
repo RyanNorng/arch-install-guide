@@ -23,6 +23,7 @@ If the system did not boot in the mode you desired (UEFI vs BIOS), refer to your
 
 1.4 Update system clock
 - Use `timedatectl`
+- `timedatectl set-ntp true` if clock is not synchronized
 
 ### Partition the disks
 
@@ -51,15 +52,23 @@ In general there are 2 main mountpoints to use: /efi or /boot but in this config
 
 4.1 mount the root fs
 - `mount /dev/root_partition /mnt`
+  
 4.2 create the subvolumes
-`btrfs subvolume create /mnt/@`
-`btrfs subvolume create /mnt/@home`
+`btrfs su cr /mnt/@`
+`btrfs su cr /mnt/@home`
+`btrfs su cr /mnt/@cache`
+`btrfs su cr /mnt/@log`
+
+
 4.3 unmount the root fs
 `umount /mnt`
+
 4.4 compress the btrfs subvolumes with Zstd
-`mount -o compress=zstd,subvol=@ /dev/nvme0n1p2 /mnt`
-`mkdir -p /mnt/home`
-`mount -o compress=zstd,subvol=@home /dev/nvme0n1p2 /mnt/home`
+mount -o subvol=/@,defaults,noatime,compress=zstd /dev/root_partition /mnt
+mount -o subvol=/@home,defaults,noatime,compress=zstd -m /dev/root_partition /mnt/home
+mount -o subvol=/@cache,defaults,noatime,compress=zstd -m /dev/root_partition /mnt/var/cache
+mount -o subvol=/@log,defaults,noatime,compress=zstd -m /dev/root_partition /mnt/var/log
+
 
 
 
