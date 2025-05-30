@@ -55,8 +55,11 @@ In general there are 2 main mountpoints to use: /efi or /boot but in this config
   
 4.2 create the subvolumes
 `btrfs su cr /mnt/@`
+
 `btrfs su cr /mnt/@home`
+
 `btrfs su cr /mnt/@cache`
+
 `btrfs su cr /mnt/@log`
 
 
@@ -65,8 +68,11 @@ In general there are 2 main mountpoints to use: /efi or /boot but in this config
 
 4.4 compress the btrfs subvolumes with Zstd
 `mount -o subvol=/@,defaults,noatime,compress=zstd /dev/root_partition /mnt`
+
 `mount -o subvol=/@home,defaults,noatime,compress=zstd -m /dev/root_partition /mnt/home`
+
 `mount -o subvol=/@cache,defaults,noatime,compress=zstd -m /dev/root_partition /mnt/var/cache`
+
 `mount -o subvol=/@log,defaults,noatime,compress=zstd -m /dev/root_partition /mnt/var/log`
 
 ## Step 3: Installation
