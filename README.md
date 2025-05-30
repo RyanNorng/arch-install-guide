@@ -37,13 +37,17 @@ If the system did not boot in the mode you desired (UEFI vs BIOS), refer to your
 ### Format the partitions
 
 3.1 `mkfs.btrfs /dev/root_partition`
+
 3.2 `mkswap  /dev/swap_partition`
+
 3.3 `mkfs.fat -F 32 /dev/efi_system_partition`
 
 ### Disk Mounting
 
 4.1 `swapon /dev/swap_partition` to enable swap
+
 4.2 `mkdir -p /mnt/efi`
+
 4.3 `mount /dev/efi_system_partition /mnt/efi`
 
 In general there are 2 main mountpoints to use: /efi or /boot but in this configuration i am forced to use /efi, because by choosing /boot we could experience a system crash when trying to restore @ ( the root subvolume ) to a previous state after kernel updates. This happens because /boot files such as the kernel won't reside on @ but on the efi partition and hence they can't be saved when snapshotting @. Also this choice grants separation of concerns and also is good if one wants to encrypt /boot, since you can't encrypt efi files. 
@@ -51,6 +55,7 @@ In general there are 2 main mountpoints to use: /efi or /boot but in this config
 ### BTRFS Subvolume setup
 
 4.1 mount the root fs
+
 - `mount /dev/root_partition /mnt`
   
 4.2 create the subvolumes
@@ -65,6 +70,7 @@ In general there are 2 main mountpoints to use: /efi or /boot but in this config
 
 
 4.3 unmount the root fs
+
 `umount /mnt`
 
 4.4 compress the btrfs subvolumes with Zstd
