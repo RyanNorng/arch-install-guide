@@ -54,6 +54,7 @@ In general there are 2 main mountpoints to use: /efi or /boot but in this config
 - `mount /dev/root_partition /mnt`
   
 4.2 create the subvolumes
+
 `btrfs su cr /mnt/@`
 
 `btrfs su cr /mnt/@home`
@@ -67,6 +68,7 @@ In general there are 2 main mountpoints to use: /efi or /boot but in this config
 `umount /mnt`
 
 4.4 compress the btrfs subvolumes with Zstd
+
 `mount -o subvol=/@,defaults,noatime,compress=zstd /dev/root_partition /mnt`
 
 `mount -o subvol=/@home,defaults,noatime,compress=zstd -m /dev/root_partition /mnt/home`
