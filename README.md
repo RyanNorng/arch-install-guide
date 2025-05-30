@@ -150,6 +150,11 @@ In general there are 2 main mountpoints to use: /efi or /boot but in this config
 
 ### Install bootloader
 
+- `grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB`
+- generage grub config with `grub-mkconfig -o /boot/grub/grub.cfg`
+
+
+
 
 
 
