@@ -28,5 +28,12 @@ If the system did not boot in the mode you desired (UEFI vs BIOS), refer to your
 
 2.1 `lsblk` to list devices
 
+2.2 `cfdisk /dev/the_disk_to_be_partitioned` to partition the disk
+- efi boot partition should be 1GiB
+- swap should be at least 4GiB (but for my purposes, I will set it equal to my ram (32G)
+- rest will go to root partition
+
+
+
 
 
