@@ -8,6 +8,7 @@ Simple enough, figure it out yourself.
 1.1 Set the console keybooard layout (US by default):
 - list available keymaps with `localectl list-keymaps`; and,
 - load the keymap with `loadkeys <your keymap here>`.
+  
 1.2 Verify the boot mode
   `cat /sys/firmware/efi/fw_platform_size`
   - If the command returns 64, the system is booted in UEFI mode and has a 64-bit x64 UEFI.
