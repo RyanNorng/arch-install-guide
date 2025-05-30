@@ -197,7 +197,17 @@ In general there are 2 main mountpoints to use: /efi or /boot but in this config
 - reboot and everything should work
 
 
+### Video drivers
 
+#### AMD
+
+- mesa: DRI driver for 3D acceleration.
+- vulkan-radeon: vulkan support.
+- libva-mesa-driver: VA-API h/w video decoding support.
+- mesa-vdpau: VDPAU h/w accelerated video decoding support.
+- `sudo pacman -S mesa vulkan-radeon libva-mesa-driver mesa-vdpau`
+
+- for 32-bit support and to enable steam, the multilib repo must be enabled by editing /etc/pacman.conf
 
 
 
