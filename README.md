@@ -160,7 +160,7 @@ In general there are 2 main mountpoints to use: /efi or /boot but in this config
 - `umount -R /mnt` to unmount everything
 - `reboot` and unplug usb
 
-## Step 4: Post-Installation
+## Step 5: Post-Installation
 
 ### Login to user acccount
 
