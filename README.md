@@ -64,10 +64,32 @@ In general there are 2 main mountpoints to use: /efi or /boot but in this config
 `umount /mnt`
 
 4.4 compress the btrfs subvolumes with Zstd
-mount -o subvol=/@,defaults,noatime,compress=zstd /dev/root_partition /mnt
-mount -o subvol=/@home,defaults,noatime,compress=zstd -m /dev/root_partition /mnt/home
-mount -o subvol=/@cache,defaults,noatime,compress=zstd -m /dev/root_partition /mnt/var/cache
-mount -o subvol=/@log,defaults,noatime,compress=zstd -m /dev/root_partition /mnt/var/log
+`mount -o subvol=/@,defaults,noatime,compress=zstd /dev/root_partition /mnt`
+`mount -o subvol=/@home,defaults,noatime,compress=zstd -m /dev/root_partition /mnt/home`
+`mount -o subvol=/@cache,defaults,noatime,compress=zstd -m /dev/root_partition /mnt/var/cache`
+`mount -o subvol=/@log,defaults,noatime,compress=zstd -m /dev/root_partition /mnt/var/log`
+
+## Step 3: Installation
+
+### Set up mirrors
+
+`reflector --country US --latest 5 --sort rate --save /etc/pacman.d/mirrorlist`
+
+### Pacstrap
+
+- "base, linux, and linux-firmware" are mandatory packages
+- "base-devel" for base developer packages
+- "git" for git
+- "btrfs-progs" is a user-space utility for btrfs file-system management
+- "grub" the bootloader
+- "efibootmgr" needed to install grub
+- "grub-btrfs" btrfs support for grub
+- "vim" text editor of choice
+- "networkmanager" to connect to the internet
+- "amd-ucode" for amd microcode
+
+`pacstrap -K /mnt base linux linux-firmware base-devel git btrfs-progs grub efibootmgr grub-btrfs vim networkmanager amd-ucode`
+
 
 
 
